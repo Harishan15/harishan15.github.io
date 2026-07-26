@@ -1,99 +1,4 @@
-const caseStudies = [
-  {
-    number: "01",
-    title: "World Holiday Vibes",
-    subtitle: "A flexible UI system for a multi-product holiday platform.",
-    type: "Holiday ecosystem",
-    year: "2021—Present",
-    href: "https://www.worldholidayvibes.com/",
-    className: "case-lime",
-    tags: ["Hotels", "Packages", "Activities", "Offers"],
-    challenge:
-      "Holiday planning quickly becomes dense: destinations, dates, rooms, activities, offers and payment choices all compete for attention.",
-    contribution:
-      "I shaped the visual direction, typography, search patterns and responsive booking interfaces—then carried the system across discovery, results, enquiry and payment touchpoints.",
-    decisions: [
-      "Built a modular visual language that could stretch across several travel products.",
-      "Prioritised booking essentials on mobile without flattening the desktop experience.",
-      "Used progressive disclosure to keep complex choices readable and actionable.",
-    ],
-    outcome:
-      "A more consistent product experience with reusable patterns the frontend team could apply across new pages and iterative releases.",
-  },
-  {
-    number: "02",
-    title: "World Cruise Vibes",
-    subtitle: "Making a complex cruise catalogue feel clear and inviting.",
-    type: "Cruise discovery",
-    year: "Selected work",
-    href: "https://www.worldcruisevibes.com/",
-    className: "case-violet",
-    tags: ["Search", "Filters", "Results", "Enquiry"],
-    challenge:
-      "Cruise journeys carry unusually rich information—from regions and ports to dates, operators, ships and itinerary details.",
-    contribution:
-      "I designed the theme and core discovery experience, including search, filters, result cards and the journey from exploration into enquiry.",
-    decisions: [
-      "Turned long filter sets into a clear hierarchy of primary and optional choices.",
-      "Designed cards to balance itinerary context, price cues and the next action.",
-      "Created responsive states that preserve comparison value on smaller screens.",
-    ],
-    outcome:
-      "A focused discovery flow that helps travellers narrow a large catalogue while keeping the emotional pull of a cruise holiday.",
-  },
-  {
-    number: "03",
-    title: "Sri Lanka Holiday Vibes",
-    subtitle: "A destination-first experience for tailor-made island travel.",
-    type: "Destination travel",
-    year: "Earlier direction",
-    href: "https://www.srilankaholidayvibes.com/",
-    className: "case-coral",
-    tags: ["Homepage", "Packages", "Destinations", "Mobile UX"],
-    challenge:
-      "The product needed to inspire travellers while still guiding them toward packages, destinations and a useful enquiry path.",
-    contribution:
-      "I created an earlier design direction from the supplied requirements, shaping the homepage, package discovery and responsive UI patterns.",
-    decisions: [
-      "Balanced destination storytelling with clear paths into purchasable packages.",
-      "Created scannable content blocks for deals, places, hotels and travel guidance.",
-      "Designed mobile layouts around fast browsing and low-friction enquiry.",
-    ],
-    outcome:
-      "A coherent foundation that connected destination inspiration with practical trip planning across desktop and mobile.",
-  },
-];
-
-const additionalWork = [
-  {
-    title: "World Flight Vibes",
-    label: "Flight booking",
-    text: "Homepage, theme direction, flight search and booking-flow interface work.",
-    href: "https://www.worldflightvibes.com/",
-    color: "blue",
-  },
-  {
-    title: "Vibes Group UK",
-    label: "Parent brand",
-    text: "Corporate homepage and a shared entry point into the group’s travel brands.",
-    href: "https://www.vibesgroupuk.com/",
-    color: "yellow",
-  },
-  {
-    title: "Visual Influences",
-    label: "Creative agency",
-    text: "A focused static website for an in-house graphic-design agency.",
-    href: "",
-    color: "pink",
-  },
-  {
-    title: "Low Cost Vibes",
-    label: "Travel booking",
-    text: "Responsive product interfaces within the wider Vibes travel ecosystem.",
-    href: "https://www.lowcostvibes.com/",
-    color: "mint",
-  },
-];
+import { caseStudies, featuredCaseStudies } from "./case-studies/data";
 
 const capabilities = [
   {
@@ -289,19 +194,22 @@ export default function Home() {
         </div>
 
         <div className="case-list">
-          {caseStudies.map((study) => (
-            <article className={`case-study ${study.className}`} key={study.title}>
+          {featuredCaseStudies.map((study) => (
+            <article
+              className={`case-study case-${study.accent}`}
+              key={study.title}
+            >
               <div className="case-intro">
                 <span className="case-number">{study.number}</span>
                 <div className="case-title-wrap">
                   <div className="case-meta">
-                    <span>{study.type}</span>
-                    <span>{study.year}</span>
+                    <span>{study.category}</span>
+                    <span>{study.period}</span>
                   </div>
                   <h3>{study.title}</h3>
                   <p>{study.subtitle}</p>
                   <div className="tag-row">
-                    {study.tags.map((tag) => (
+                    {study.deliverables.slice(0, 4).map((tag) => (
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
@@ -339,7 +247,7 @@ export default function Home() {
 
               <details className="case-details">
                 <summary>
-                  <span>Read case study</span>
+                  <span>Quick overview</span>
                   <i aria-hidden="true">+</i>
                 </summary>
                 <div className="case-detail-grid">
@@ -362,8 +270,8 @@ export default function Home() {
                   <div className="outcome-block">
                     <span className="detail-label">Outcome</span>
                     <p>{study.outcome}</p>
-                    <a href={study.href} target="_blank" rel="noreferrer">
-                      Visit live product <span aria-hidden="true">↗</span>
+                    <a href={`/case-studies/${study.slug}`}>
+                      Read full case study <span aria-hidden="true">↗</span>
                     </a>
                   </div>
                 </div>
@@ -379,43 +287,39 @@ export default function Home() {
         </p>
 
         <div className="more-work-heading">
-          <span>More work across the ecosystem</span>
+          <span>Complete project archive · {caseStudies.length} case studies</span>
           <span className="line" />
         </div>
-        <div className="more-work-grid">
-          {additionalWork.map((item) => {
-            const content = (
-              <>
-                <div className={`work-shape work-shape-${item.color}`}>
-                  <span />
-                  <i />
-                </div>
-                <div className="more-work-meta">{item.label}</div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <span className="work-link">
-                  {item.href ? "View product" : "Selected contribution"}
-                  {item.href && <i aria-hidden="true">↗</i>}
-                </span>
-              </>
-            );
-
-            return item.href ? (
-              <a
-                className="more-work-card"
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                key={item.title}
-              >
-                {content}
-              </a>
-            ) : (
-              <article className="more-work-card" key={item.title}>
-                {content}
-              </article>
-            );
-          })}
+        <div className="project-archive-grid">
+          {caseStudies.map((study) => (
+            <a
+              className={`project-archive-card archive-${study.accent}`}
+              href={`/case-studies/${study.slug}`}
+              key={study.slug}
+            >
+              <div className="archive-card-visual">
+                {study.heroImage ? (
+                  <img src={study.heroImage} alt="" loading="lazy" />
+                ) : (
+                  <>
+                    <span />
+                    <i />
+                    <b />
+                  </>
+                )}
+                <small>{study.number}</small>
+              </div>
+              <div className="archive-card-meta">
+                <span>{study.category}</span>
+                <span>{study.stage}</span>
+              </div>
+              <h3>{study.title}</h3>
+              <p>{study.subtitle}</p>
+              <span className="archive-card-link">
+                Read case study <i aria-hidden="true">↗</i>
+              </span>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -506,6 +410,48 @@ export default function Home() {
               <span>3D design</span>
             </div>
           </div>
+        </div>
+
+        <div className="about-evidence-grid">
+          <a className="about-evidence-card" href="/case-studies/drawing-robot">
+            <div className="about-evidence-image">
+              <img
+                src="/media/drawing-robot/hero.jpg"
+                alt="Harishan's drawing robot plotting on paper"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <span className="panel-label">Builder origin · 2017</span>
+              <h3>Failure, calibration, success.</h3>
+              <p>
+                See the original machine, test footage and final school-crest
+                drawing.
+              </p>
+              <span className="about-evidence-link">Open case study ↗</span>
+            </div>
+          </a>
+          <a
+            className="about-evidence-card"
+            href="/case-studies/society-editorial-design"
+          >
+            <div className="about-evidence-image about-evidence-image-editorial">
+              <img
+                src="/media/early-design/refraction-poster.jpg"
+                alt="Refraction 2017 photography competition poster"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <span className="panel-label">Visual roots · 2017</span>
+              <h3>Design before product design.</h3>
+              <p>
+                Early editorial and event work that developed my eye for
+                hierarchy and visual systems.
+              </p>
+              <span className="about-evidence-link">Open case study ↗</span>
+            </div>
+          </a>
         </div>
       </section>
 
