@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { caseStudies, featuredCaseStudies } from "./case-studies/data";
 
 const capabilities = [
@@ -270,9 +271,9 @@ export default function Home() {
                   <div className="outcome-block">
                     <span className="detail-label">Outcome</span>
                     <p>{study.outcome}</p>
-                    <a href={`/case-studies/${study.slug}`}>
+                    <Link href={`/case-studies/${study.slug}`}>
                       Read full case study <span aria-hidden="true">↗</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </details>
@@ -292,7 +293,7 @@ export default function Home() {
         </div>
         <div className="project-archive-grid">
           {caseStudies.map((study) => (
-            <a
+            <Link
               className={`project-archive-card archive-${study.accent}`}
               href={`/case-studies/${study.slug}`}
               key={study.slug}
@@ -318,7 +319,7 @@ export default function Home() {
               <span className="archive-card-link">
                 Read case study <i aria-hidden="true">↗</i>
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -413,7 +414,7 @@ export default function Home() {
         </div>
 
         <div className="about-evidence-grid">
-          <a className="about-evidence-card" href="/case-studies/drawing-robot">
+          <Link className="about-evidence-card" href="/case-studies/drawing-robot">
             <div className="about-evidence-image">
               <img
                 src="/media/drawing-robot/hero.jpg"
@@ -430,8 +431,8 @@ export default function Home() {
               </p>
               <span className="about-evidence-link">Open case study ↗</span>
             </div>
-          </a>
-          <a
+          </Link>
+          <Link
             className="about-evidence-card"
             href="/case-studies/society-editorial-design"
           >
@@ -451,7 +452,7 @@ export default function Home() {
               </p>
               <span className="about-evidence-link">Open case study ↗</span>
             </div>
-          </a>
+          </Link>
         </div>
       </section>
 

@@ -2,90 +2,41 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
+const outputRoot = new URL("../out/", import.meta.url);
+const caseStudyRoot = new URL("case-studies/", outputRoot);
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+test("exports the portfolio homepage with production metadata", async () => {
+  const html = await readFile(new URL("index.html", outputRoot), "utf8");
 
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
-}
-
-test("server-renders the starter loading skeleton", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
   assert.match(
     html,
-    /Your first version will appear here automatically when it’s ready\./,
+    /<title>Harishan Rajendrakumar — Lead UI\/UX Engineer<\/title>/,
   );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+  assert.match(html, /I make complex journeys feel/);
+  assert.match(html, /Complete project archive/);
+  assert.match(html, /https:\/\/harishan15\.github\.io\/og\.png/);
+  assert.match(html, /href="\/case-studies\/world-holiday-vibes\/"/);
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
-  ]);
+test("pre-renders every case study and includes portfolio media", async () => {
+  const routes = (await readdir(caseStudyRoot, { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+  assert.equal(routes.length, 14);
+  assert.ok(routes.includes("drawing-robot"));
+  assert.ok(routes.includes("world-holiday-vibes"));
+  assert.ok(routes.includes("world-pinoy-flights"));
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
+  const caseStudyHtml = await readFile(
+    new URL("drawing-robot/index.html", caseStudyRoot),
+    "utf8",
   );
+  assert.match(caseStudyHtml, /Drawing Robot case study/);
+  assert.match(caseStudyHtml, /\/media\/drawing-robot\/success-attempt\.mp4/);
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
-
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+  await access(new URL("media/drawing-robot/hero.jpg", outputRoot));
+  await access(new URL("media/early-design/refraction-poster.jpg", outputRoot));
+  await access(new URL("og.png", outputRoot));
 });

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy } from "../data";
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return caseStudies.map((study) => ({ slug: study.slug }));
@@ -45,18 +48,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   return (
     <main className={`case-page accent-${study.accent}`}>
       <header className="site-header">
-        <a
+        <Link
           className="brand-mark"
           href="/"
           aria-label="Harishan Rajendrakumar — portfolio home"
         >
           <span>H</span>
           <span>R</span>
-        </a>
+        </Link>
         <nav className="site-nav" aria-label="Primary navigation">
-          <a href="/#work">All work</a>
-          <a href="/#capabilities">Capabilities</a>
-          <a href="/#about">About</a>
+          <Link href="/#work">All work</Link>
+          <Link href="/#capabilities">Capabilities</Link>
+          <Link href="/#about">About</Link>
         </nav>
         <a className="header-cta" href="mailto:harishan820@gmail.com">
           Let&apos;s talk
@@ -65,10 +68,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </header>
 
       <section className="case-page-hero section-shell">
-        <a className="case-back-link" href="/#work">
+        <Link className="case-back-link" href="/#work">
           <span aria-hidden="true">←</span>
           All case studies
-        </a>
+        </Link>
         <div className="case-page-heading">
           <div>
             <div className="eyebrow">
@@ -285,18 +288,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <section className="next-case">
         <div className="section-shell">
           <span className="kicker">Next case study</span>
-          <a href={`/case-studies/${nextStudy.slug}`}>
+          <Link href={`/case-studies/${nextStudy.slug}`}>
             <span>{nextStudy.title}</span>
             <i aria-hidden="true">↗</i>
-          </a>
+          </Link>
         </div>
       </section>
 
       <footer className="site-footer">
-        <a className="brand-mark brand-mark-footer" href="/" aria-label="Portfolio home">
+        <Link className="brand-mark brand-mark-footer" href="/" aria-label="Portfolio home">
           <span>H</span>
           <span>R</span>
-        </a>
+        </Link>
         <p>Designed around clarity. Built with curiosity.</p>
         <div>
           <span>Colombo, Sri Lanka</span>
