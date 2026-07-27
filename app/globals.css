@@ -22,14 +22,25 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 7rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 body::selection {
@@ -1428,11 +1439,13 @@ input {
 }
 
 .ticker {
+  width: 100%;
   overflow: hidden;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
   background: var(--lime);
-  transform: rotate(-0.45deg) scale(1.01);
+  transform: rotate(-0.45deg);
+  transform-origin: center;
 }
 
 .ticker-track {
