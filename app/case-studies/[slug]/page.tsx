@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { withBasePath } from "../../site-paths";
 import { caseStudies, getCaseStudy } from "../data";
 
 type CaseStudyPageProps = {
@@ -90,7 +91,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         {study.heroImage ? (
           <figure className="case-hero-image">
-            <img src={study.heroImage} alt={study.heroImageAlt ?? ""} />
+            <img
+              src={withBasePath(study.heroImage)}
+              alt={study.heroImageAlt ?? ""}
+            />
             <figcaption>
               <span>Project evidence</span>
               <span>{study.period}</span>
@@ -219,16 +223,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   key={`${item.src}-${index}`}
                 >
                   {item.kind === "image" ? (
-                    <img src={item.src} alt={item.alt} loading="lazy" />
+                    <img
+                      src={withBasePath(item.src)}
+                      alt={item.alt}
+                      loading="lazy"
+                    />
                   ) : (
                     <video
                       controls
                       playsInline
                       preload="metadata"
-                      poster={item.poster}
+                      poster={withBasePath(item.poster)}
                       aria-label={item.alt}
                     >
-                      <source src={item.src} type="video/mp4" />
+                      <source src={withBasePath(item.src)} type="video/mp4" />
                       Your browser does not support embedded video.
                     </video>
                   )}

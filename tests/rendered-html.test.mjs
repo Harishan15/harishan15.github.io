@@ -14,8 +14,14 @@ test("exports the portfolio homepage with production metadata", async () => {
   );
   assert.match(html, /I make complex journeys feel/);
   assert.match(html, /Complete project archive/);
-  assert.match(html, /https:\/\/harishan15\.github\.io\/og\.png/);
-  assert.match(html, /href="\/case-studies\/world-holiday-vibes\/"/);
+  assert.match(
+    html,
+    /https:\/\/harishan15\.github\.io\/SHS-Portfolio\/og\.png/,
+  );
+  assert.match(
+    html,
+    /href="\/SHS-Portfolio\/case-studies\/world-holiday-vibes\/"/,
+  );
 });
 
 test("pre-renders every case study and includes portfolio media", async () => {
@@ -34,7 +40,10 @@ test("pre-renders every case study and includes portfolio media", async () => {
     "utf8",
   );
   assert.match(caseStudyHtml, /Drawing Robot case study/);
-  assert.match(caseStudyHtml, /\/media\/drawing-robot\/success-attempt\.mp4/);
+  assert.match(
+    caseStudyHtml,
+    /\/SHS-Portfolio\/media\/drawing-robot\/success-attempt\.mp4/,
+  );
 
   await access(new URL("media/drawing-robot/hero.jpg", outputRoot));
   await access(new URL("media/early-design/refraction-poster.jpg", outputRoot));

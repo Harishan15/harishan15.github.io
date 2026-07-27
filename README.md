@@ -40,6 +40,6 @@ Pushing `main` runs `.github/workflows/deploy-pages.yml`. The workflow:
 1. installs the locked dependencies;
 2. creates a Next.js static export in `out/`;
 3. uploads the export as a GitHub Pages artifact; and
-4. deploys it to `https://harishan15.github.io/`.
+4. deploys it to `https://harishan15.github.io/SHS-Portfolio/`.
 
 The existing Cloudflare/Sites build remains available through `npm run build`.

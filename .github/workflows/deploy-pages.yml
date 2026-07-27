@@ -38,7 +38,8 @@ jobs:
         run: npm run build:pages
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_SITE_URL: "https://harishan15.github.io"
+          NEXT_PUBLIC_BASE_PATH: "/SHS-Portfolio"
+          NEXT_PUBLIC_SITE_URL: "https://harishan15.github.io/SHS-Portfolio"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

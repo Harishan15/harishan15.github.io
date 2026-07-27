@@ -12,10 +12,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl = new URL(
+const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ??
-    "https://harishan-ux-portfolio.hxrishxn.chatgpt.site",
-);
+  "https://harishan-ux-portfolio.hxrishxn.chatgpt.site"
+).replace(/\/+$/, "");
+const baseUrl = new URL(`${siteUrl}/`);
+const socialImageUrl = `${siteUrl}/og.png`;
 const title = "Harishan Rajendrakumar — Lead UI/UX Engineer";
 const description =
   "Portfolio and case studies from a Lead UI/UX Engineer designing responsive travel booking products and building them in React and Next.js.";
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: new URL("/og.png", baseUrl).toString(),
+        url: socialImageUrl,
         width: 1792,
         height: 921,
         alt: "Harishan Rajendrakumar — Lead UI/UX Engineer portfolio",
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: [new URL("/og.png", baseUrl).toString()],
+    images: [socialImageUrl],
   },
 };
 

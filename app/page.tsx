@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { caseStudies, featuredCaseStudies } from "./case-studies/data";
+import { withBasePath } from "./site-paths";
 
 const capabilities = [
   {
@@ -300,7 +301,11 @@ export default function Home() {
             >
               <div className="archive-card-visual">
                 {study.heroImage ? (
-                  <img src={study.heroImage} alt="" loading="lazy" />
+                  <img
+                    src={withBasePath(study.heroImage)}
+                    alt=""
+                    loading="lazy"
+                  />
                 ) : (
                   <>
                     <span />
@@ -417,7 +422,7 @@ export default function Home() {
           <Link className="about-evidence-card" href="/case-studies/drawing-robot">
             <div className="about-evidence-image">
               <img
-                src="/media/drawing-robot/hero.jpg"
+                src={withBasePath("/media/drawing-robot/hero.jpg")}
                 alt="Harishan's drawing robot plotting on paper"
                 loading="lazy"
               />
@@ -438,7 +443,7 @@ export default function Home() {
           >
             <div className="about-evidence-image about-evidence-image-editorial">
               <img
-                src="/media/early-design/refraction-poster.jpg"
+                src={withBasePath("/media/early-design/refraction-poster.jpg")}
                 alt="Refraction 2017 photography competition poster"
                 loading="lazy"
               />
