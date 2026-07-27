@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { caseStudies, featuredCaseStudies } from "./case-studies/data";
+import HeroProductShowcase from "./HeroProductShowcase";
 import { withBasePath } from "./site-paths";
 
 const capabilities = [
@@ -94,76 +95,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-art" aria-label="Abstract travel booking interface illustration">
+        <div
+          className="hero-art"
+          role="img"
+          aria-label="Animated travel interface showcase featuring flight, mobile, package, hotel, activity, cruise and destination designs"
+        >
           <div className="orbit orbit-one" />
           <div className="orbit orbit-two" />
           <div className="shape shape-blue" />
           <div className="shape shape-coral" />
-          <div className="product-window">
-            <div className="window-bar">
-              <div className="window-dots">
-                <span />
-                <span />
-                <span />
-              </div>
-              <span className="window-title">booking-flow.v2</span>
-              <span className="window-live">LIVE</span>
-            </div>
-            <div className="window-content">
-              <div className="route-line">
-                <div>
-                  <span className="micro-label">FROM</span>
-                  <strong>CMB</strong>
-                  <small>Colombo</small>
-                </div>
-                <div className="route-path">
-                  <span />
-                  <i>✦</i>
-                  <span />
-                </div>
-                <div>
-                  <span className="micro-label">TO</span>
-                  <strong>ANY</strong>
-                  <small>Good idea</small>
-                </div>
-              </div>
-              <div className="search-row">
-                <div>
-                  <span className="micro-label">DEPART</span>
-                  <strong>12 AUG</strong>
-                </div>
-                <div>
-                  <span className="micro-label">TRAVELLERS</span>
-                  <strong>02</strong>
-                </div>
-                <button type="button" tabIndex={-1} aria-hidden="true">
-                  Search
-                </button>
-              </div>
-              <div className="result-card">
-                <div className="result-visual">
-                  <span>09:40</span>
-                  <i />
-                  <span>18:20</span>
-                </div>
-                <div className="result-meta">
-                  <span>Recommended journey</span>
-                  <strong>Clear by design</strong>
-                </div>
-                <div className="result-price">
-                  <small>from</small>
-                  <strong>£648</strong>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HeroProductShowcase />
           <div className="floating-chip chip-top">
             <span>✦</span>
-            Product thinking
+            7 travel interfaces
           </div>
           <div className="floating-chip chip-bottom">
             <span>↗</span>
-            Shipped to production
+            Designed + built
           </div>
           <div className="coordinate coordinate-one">79.8612° E</div>
           <div className="coordinate coordinate-two">06.9271° N</div>
@@ -518,30 +466,45 @@ export default function Home() {
         <div className="contact-shape contact-shape-one" />
         <div className="contact-shape contact-shape-two" />
         <div className="section-shell contact-inner">
-          <span className="kicker">05 / Start a conversation</span>
-          <h2>
-            Have a complex product?
-            <br />
-            Let&apos;s make it feel simple.
-          </h2>
-          <p>
-            I&apos;m interested in ambitious product teams, thoughtful UI systems
-            and opportunities that stretch design into new territory.
-          </p>
-          <div className="contact-actions">
-            <a className="button button-dark" href="mailto:harishan820@gmail.com">
-              Email Harishan
-              <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              className="button button-ghost"
-              href="https://www.linkedin.com/in/hxrishxn/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Connect on LinkedIn
-            </a>
+          <div className="contact-copy">
+            <span className="kicker">05 / Start a conversation</span>
+            <h2>
+              Have a complex product?
+              <br />
+              Let&apos;s make it feel simple.
+            </h2>
+            <p>
+              I&apos;m interested in ambitious product teams, thoughtful UI systems
+              and opportunities that stretch design into new territory.
+            </p>
+            <div className="contact-actions">
+              <a className="button button-dark" href="mailto:harishan820@gmail.com">
+                Email Harishan
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                className="button button-ghost"
+                href="https://www.linkedin.com/in/hxrishxn/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Connect on LinkedIn
+              </a>
+            </div>
           </div>
+          <figure className="contact-portrait">
+            <div className="contact-portrait-frame">
+              <img
+                src={withBasePath("/media/portrait/harishan-portrait.jpg")}
+                alt="Harishan Rajendrakumar"
+                loading="lazy"
+              />
+            </div>
+            <figcaption>
+              <span>Harishan Rajendrakumar</span>
+              <small>Lead UI/UX Engineer · Colombo</small>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
