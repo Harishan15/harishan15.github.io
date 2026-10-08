@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { withBasePath } from "../../site-paths";
-import { caseStudies, getCaseStudy } from "../data";
+import { withBasePath } from "@/app/site-paths";
+import { caseStudies, getCaseStudy } from "@/app/case-studies/data";
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
@@ -51,16 +51,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <header className="site-header">
         <Link
           className="brand-mark"
-          href="/"
+          href="/portfolio-v1/"
           aria-label="Harishan Rajendrakumar — portfolio home"
         >
           <span>H</span>
           <span>R</span>
         </Link>
         <nav className="site-nav" aria-label="Primary navigation">
-          <Link href="/#work">All work</Link>
-          <Link href="/#capabilities">Capabilities</Link>
-          <Link href="/#about">About</Link>
+          <Link href="/portfolio-v1/#work">All work</Link>
+          <Link href="/portfolio-v1/#capabilities">Capabilities</Link>
+          <Link href="/portfolio-v1/#about">About</Link>
         </nav>
         <a className="header-cta" href="mailto:harishan820@gmail.com">
           Let&apos;s talk
@@ -69,7 +69,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </header>
 
       <section className="case-page-hero section-shell">
-        <Link className="case-back-link" href="/#work">
+        <Link className="case-back-link" href="/portfolio-v1/#work">
           <span aria-hidden="true">←</span>
           All case studies
         </Link>
@@ -296,7 +296,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <section className="next-case">
         <div className="section-shell">
           <span className="kicker">Next case study</span>
-          <Link href={`/case-studies/${nextStudy.slug}`}>
+          <Link href={`/portfolio-v1/case-studies/${nextStudy.slug}`}>
             <span>{nextStudy.title}</span>
             <i aria-hidden="true">↗</i>
           </Link>
@@ -304,7 +304,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </section>
 
       <footer className="site-footer">
-        <Link className="brand-mark brand-mark-footer" href="/" aria-label="Portfolio home">
+        <Link className="brand-mark brand-mark-footer" href="/portfolio-v1/" aria-label="Portfolio home">
           <span>H</span>
           <span>R</span>
         </Link>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./legacy.css";
+import VersionSwitch from "@/app/components/VersionSwitch";
+import "@/app/components/version-switch.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,7 @@ const geistMono = Geist_Mono({
 
 const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://harishan-ux-portfolio.hxrishxn.chatgpt.site"
+  "https://harishan15.github.io"
 ).replace(/\/+$/, "");
 const baseUrl = new URL(`${siteUrl}/`);
 const socialImageUrl = `${siteUrl}/og.png`;
@@ -67,6 +69,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <VersionSwitch version="v1" />
       </body>
     </html>
   );

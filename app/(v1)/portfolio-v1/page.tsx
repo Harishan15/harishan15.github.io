@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { caseStudies, featuredCaseStudies } from "./case-studies/data";
-import HeroProductShowcase from "./HeroProductShowcase";
-import { withBasePath } from "./site-paths";
+import { caseStudies, featuredCaseStudies } from "@/app/case-studies/data";
+import HeroProductShowcase from "@/app/HeroProductShowcase";
+import { withBasePath } from "@/app/site-paths";
 
 const capabilities = [
   {
@@ -220,7 +220,7 @@ export default function Home() {
                   <div className="outcome-block">
                     <span className="detail-label">Outcome</span>
                     <p>{study.outcome}</p>
-                    <Link href={`/case-studies/${study.slug}`}>
+                    <Link href={`/portfolio-v1/case-studies/${study.slug}`}>
                       Read full case study <span aria-hidden="true">↗</span>
                     </Link>
                   </div>
@@ -244,7 +244,7 @@ export default function Home() {
           {caseStudies.map((study) => (
             <Link
               className={`project-archive-card archive-${study.accent}`}
-              href={`/case-studies/${study.slug}`}
+              href={`/portfolio-v1/case-studies/${study.slug}`}
               key={study.slug}
             >
               <div className="archive-card-visual">
@@ -367,7 +367,7 @@ export default function Home() {
         </div>
 
         <div className="about-evidence-grid">
-          <Link className="about-evidence-card" href="/case-studies/drawing-robot">
+          <Link className="about-evidence-card" href="/portfolio-v1/case-studies/drawing-robot">
             <div className="about-evidence-image">
               <img
                 src={withBasePath("/media/drawing-robot/hero.jpg")}
@@ -387,7 +387,7 @@ export default function Home() {
           </Link>
           <Link
             className="about-evidence-card"
-            href="/case-studies/society-editorial-design"
+            href="/portfolio-v1/case-studies/society-editorial-design"
           >
             <div className="about-evidence-image about-evidence-image-editorial">
               <img
